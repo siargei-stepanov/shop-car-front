@@ -2,6 +2,10 @@
 
 See `develop` branch for development
 
+S3 bucket - http://car-app-bucket.s3-website-eu-west-1.amazonaws.com
+
+CloudFront - https://d27sqozkj6jack.cloudfront.net/
+
 ## Project setup
 ```
 npm install
