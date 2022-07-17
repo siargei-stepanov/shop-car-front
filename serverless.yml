@@ -1,29 +1,79 @@
-service: node-in-aws-web
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
 
+service: my-car-app
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
 frameworkVersion: '2'
 
 provider:
   name: aws
   region: eu-west-1
   runtime: nodejs12.x
-  # setup profile for AWS CLI.
-  # profile: node-aws
+#  lambdaHashingVersion: 20201221
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: us-east-1
 
 plugins:
   - serverless-finch
-  # 'serverless-single-page-app-plugin' is a custom plugin that located .serverless_plugins folder.
-  # Existing plugin (https://www.npmjs.com/package/serverless-single-page-app-plugin) doesn't have invalidate cache feature that often used during CI/CD events.
-  # How to build your own plugins: https://www.serverless.com/framework/docs/providers/aws/guide/plugins#service-local-plugin
   - serverless-single-page-app-plugin
-
 custom:
   client:
-    bucketName: node-in-aws-web-bucket
+    bucketName: car-app-bucket2
     distributionFolder: build
+    indexDocument: index.html
+    manageResources: false
   s3BucketName: ${self:custom.client.bucketName}
-
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
+
+# you can add statements to the Lambda function's IAM Role here
+#  iamRoleStatements:
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:ListBucket"
+#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+#    - Effect: "Allow"
+#      Action:
+#        - "s3:PutObject"
+#      Resource:
+#        Fn::Join:
+#          - ""
+#          - - "arn:aws:s3:::"
+#            - "Ref" : "ServerlessDeploymentBucket"
+#            - "/*"
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+# you can add packaging information here
+#package:
+#  patterns:
+#    - '!exclude-me.js'
+#    - '!exclude-me-dir/**'
+#    - include-me.js
+#    - include-me-dir/**
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
 
 resources:
   Resources:
@@ -76,10 +126,10 @@ resources:
               ## In case you don't want to restrict the bucket access use CustomOriginConfig and remove S3OriginConfig
               S3OriginConfig:
                 OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
-             # CustomOriginConfig:
-             #   HTTPPort: 80
-             #   HTTPSPort: 443
-             #   OriginProtocolPolicy: https-only
+            # CustomOriginConfig:
+            #   HTTPPort: 80
+            #   HTTPSPort: 443
+            #   OriginProtocolPolicy: https-only
           Enabled: true
           IPV6Enabled: true
           HttpVersion: http2
