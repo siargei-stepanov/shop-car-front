@@ -40,9 +40,9 @@ const deleteProductById = (id: string) => {
 };
 
 const saveProduct = (productToSave: Product) => {
-	console.info(`PUT saveProduct: ${JSON.stringify(productToSave)}`);
+	console.info(`POST saveProduct: ${JSON.stringify(productToSave)}`);
 
-	return axios.put(`${API_PATHS.bff}/product`, productToSave);
+	return axios.post(`${API_PATHS.bff}/products`, productToSave);
 };
 
 export const productApi = {
