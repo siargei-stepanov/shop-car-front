@@ -17,10 +17,10 @@
 
 		<template v-slot:item="{ item }">
 			<tr>
-				<td>{{ item.title }}</td>
+				<td>{{ item.manufacturer }}</td>
 
 				<td>
-					{{ item.description }}
+					{{ item.model }}
 				</td>
 
 				<td>{{ item.price }}</td>
