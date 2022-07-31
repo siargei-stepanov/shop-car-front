@@ -55,8 +55,9 @@ import VProductForm from './ui/ProductForm.vue';
 
 const emptyProductStub = {
 	id: '',
-	title: '',
-	description: '',
+	manufacturer: '',
+	model: '',
+	img: '',
 	count: 0,
 	price: 0,
 };

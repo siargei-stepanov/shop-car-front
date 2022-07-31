@@ -14,19 +14,27 @@
 		<v-row>
 			<v-col cols="12" md="12">
 				<v-text-field
-					:label="$t('products.title')"
-					name="title"
-					v-model="title"
+					:label="$t('products.manufacturer')"
+					name="manufacturer"
+					v-model="manufacturer"
 					:rules="validationRules"
 				></v-text-field>
 			</v-col>
 
 			<v-col cols="12" md="12">
 				<v-text-field
-					:label="$t('products.description')"
-					name="description"
-					v-model="description"
+					:label="$t('products.model')"
+					name="model"
+					v-model="model"
 					:rules="validationRules"
+				></v-text-field>
+			</v-col>
+
+			<v-col cols="12" md="12">
+				<v-text-field
+					:label="$t('products.img')"
+					name="img"
+					v-model="img"
 				></v-text-field>
 			</v-col>
 
@@ -86,8 +94,9 @@ export default Vue.extend({
 		valid: true,
 		validationRules: [required],
 		//
-		title: '',
-		description: '',
+		manufacturer: '',
+		model: '',
+		img: '',
 		count: 0,
 		price: 0,
 	}),
@@ -105,8 +114,9 @@ export default Vue.extend({
 	},
 	watch: {
 		product(v: Product) {
-			this.title = v.title;
-			this.description = v.description;
+			this.manufacturer = v.manufacturer;
+			this.model = v.model;
+			this.img = v.model;
 			this.count = v.count;
 			this.price = v.price;
 		},
@@ -123,15 +133,17 @@ export default Vue.extend({
 			}
 
 			this.$emit('submit', {
-				title: this.title,
-				description: this.description,
+				manufacturer: this.manufacturer,
+				model: this.model,
+				img: this.img,
 				count: this.count,
 				price: this.price,
 			});
 		},
 		handleFormReset() {
-			this.title = '';
-			this.description = '';
+			this.manufacturer = '';
+			this.model = '';
+			this.img = '';
 			this.count = 0;
 			this.price = 0;
 		},
